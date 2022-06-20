@@ -101,25 +101,24 @@
 
 <header>
     <h1>Tweeting Goose</h1>
-    <button>Logout</button>
-
+    <button onclick="window.location.href = 'login.html'">Logout</button>
 </header>
 
 <section>
 
     <div class="new-tweet-container">
-        <button>POST</button>
+        <button id="btnPost">POST</button>
         <textarea cols="69" rows="3" placeholder="Come and post something!"></textarea>
     </div>
 
-    <ul>
+    <ul id="tweetList">
         <div class="tweet">
             <img src="logo.jpg" alt="no pic found" class="avatar" width="60px">
             <div class="middle-container">
                 <span class="username">Coding Goose</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, laudantium.</p>
             </div>
-            <button style="background: red">X</button>
+            <button style="background: red" onclick="delTweet(this)">X</button>
         </div>
         <div class="tweet">
             <img src="logo.jpg" alt="no pic found" class="avatar" width="60px">
@@ -127,7 +126,7 @@
                 <span class="username">Coding Goose</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, laudantium.</p>
             </div>
-            <button style="background: red">X</button>
+            <button style="background: red" onclick="delTweet(this)">X</button>
         </div>
         <div class="tweet">
             <img src="logo.jpg" alt="no pic found" class="avatar" width="60px">
@@ -135,13 +134,38 @@
                 <span class="username">Coding Goose</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, laudantium.</p>
             </div>
-            <button style="background: red">X</button>
+            <button style="background: red" onclick="delTweet(this)">X</button>
         </div>
 
     </ul>
 
 </section>
 
+<script>
+    const textarea = document.querySelector('textarea');
+    const tweetList = document.getElementById('tweetList')
+
+    function addTweet() {
+        const tweet = document.createElement('div');
+        tweet.classList.add('tweet');
+        tweet.innerHTML = `
+        <img src="logo.jpg" alt="no pic found" class="avatar" width="60px">
+            <div class="middle-container">
+                <span class="username">Coding Goose</span>
+                <p>${textarea.value}</p>
+            </div>
+            <button style="background: red" onclick="delTweet(this)">X</button>
+        `;
+
+        tweetList.appendChild(tweet);
+    }
+
+    function delTweet(button) {
+        button.parentElement.remove();
+    }
+
+   document.getElementById('btnPost').addEventListener('click', () => addTweet());
+</script>
 
 </body>
 </html>
